@@ -1,0 +1,178 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "project1",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.11.5",
+      "toolsId": "24c3cb0c-bb12-467d-aa59-44254c471e0a"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zkh_sb_storeports4/srvd/sap/zkh_sd_storeport/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.129.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "project1.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ZKH_CDS_STOREPORTList",
+          "target": "ZKH_CDS_STOREPORTList"
+        },
+        {
+          "pattern": "ZKH_CDS_STOREPORT({key}):?query:",
+          "name": "ZKH_CDS_STOREPORTObjectPage",
+          "target": "ZKH_CDS_STOREPORTObjectPage"
+        }
+      ],
+      "targets": {
+        "ZKH_CDS_STOREPORTList": {
+          "type": "Component",
+          "id": "ZKH_CDS_STOREPORTList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/ZKH_CDS_STOREPORT",
+              "variantManagement": "Page",
+              "navigation": {
+                "ZKH_CDS_STOREPORT": {
+                  "detail": {
+                    "route": "ZKH_CDS_STOREPORTObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "AnalyticalTable",
+                    "widthIncludingColumnHeader": true,
+                    "personalization": {
+                      "column": true
+                    }
+                  },
+                  "columns": {
+                    "DataField::vbeln": {
+                      "width": "12.5%"
+                    },
+                    "DataField::erdat": {
+                      "width": "12.5%"
+                    },
+                    "DataField::lfdat": {
+                      "width": "12.5%"
+                    },
+                    "DataField::lgort": {
+                      "width": "12.5%"
+                    },
+                    "DataField::matnr": {
+                      "width": "12.5%"
+                    },
+                    "DataField::dismm": {
+                      "width": "12.5%"
+                    }
+                  }
+                }
+              },
+              "initialLoad": "Enabled"
+            }
+          }
+        },
+        "ZKH_CDS_STOREPORTObjectPage": {
+          "type": "Component",
+          "id": "ZKH_CDS_STOREPORTObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ZKH_CDS_STOREPORT"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
